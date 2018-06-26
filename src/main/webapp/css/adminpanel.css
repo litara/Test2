@@ -1,0 +1,26 @@
+@charset "UTF-8";
+.body{
+	line-height: 0px;
+	background-color: #F2F2F2;
+}
+.navigation{
+	padding-right: 0px;
+}
+.text{
+	border-radius: 5px;
+}
+.editing{
+	padding-left:0px;
+}
+.elementPanel{
+	padding: 0px;
+	border: 0px;
+	width: 100%;
+	border-radius: 0px;
+}
+.date{
+	line-height: 12px;
+}
+.time{
+	line-height: 12px;
+}

@@ -1,0 +1,20 @@
+@charset "UTF-8";
+.body{
+	background-color: #F2F2F2;
+}
+.mynavbar{
+	margin-top: 25px;
+	border-radius: 15px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+.register{
+	padding: 0px;
+}
+.myform{
+	    background-color: rgba(255,255,255,.8);
+	    padding: 0px;
+	    border-bottom-left-radius: 15px;
+	    border-bottom-right-radius: 15px;
+	    padding: 25px;
+}
