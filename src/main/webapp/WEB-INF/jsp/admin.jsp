@@ -24,6 +24,7 @@
 				<a class="mybtn btn-dark btn elementPanel" href="admin-type">Типы вагона</a>
 				<a class="mybtn btn-dark btn elementPanel" href="admin-category">Категории вагона</a>
 				<a class="mybtn btn-dark btn elementPanel" href="admin-coach">Вагоны</a>
+				<a class="mybtn btn-dark btn elementPanel" href="admin-timetable">Расписание</a>
 			</div>
 			<div class="col-9 editing">
 				<c:if test="${nameOfTable==null}">

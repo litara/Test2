@@ -2,12 +2,15 @@ package com.litara.Test2.model;
 
 import java.sql.Time;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -27,6 +30,14 @@ public class Way {
 	private Train train;
 	private Time start_time;
 	private Time end_time;
+	@OneToMany(mappedBy="way", cascade=CascadeType.ALL)
+	private Set<Timetable> timetable;
+	public Set<Timetable> getTimetable() {
+		return timetable;
+	}
+	public void setTimetable(Set<Timetable> timetable) {
+		this.timetable = timetable;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -56,6 +67,9 @@ public class Way {
 	}
 	public void setEnd_time(Time end_time) {
 		this.end_time = end_time;
+	}
+	public String getStationTrain() {
+		return station.getName()+":"+train.getName();
 	}
 	
 }

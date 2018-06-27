@@ -18,15 +18,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.litara.Test2.model.Category;
 import com.litara.Test2.model.Class;
+import com.litara.Test2.model.Coach;
 import com.litara.Test2.model.Passenger;
 import com.litara.Test2.model.Station;
+import com.litara.Test2.model.Timetable;
 import com.litara.Test2.model.Train;
 import com.litara.Test2.model.Type;
 import com.litara.Test2.model.Way;
 import com.litara.Test2.services.CategoryService;
 import com.litara.Test2.services.ClassService;
+import com.litara.Test2.services.CoachService;
 import com.litara.Test2.services.PassengerService;
 import com.litara.Test2.services.StationService;
+import com.litara.Test2.services.TimetableService;
 import com.litara.Test2.services.TrainService;
 import com.litara.Test2.services.TypeService;
 import com.litara.Test2.services.WayService;
@@ -48,6 +52,10 @@ public class AdminController {
 	TypeService typeService;
 	@Autowired
 	CategoryService categoryService;
+	@Autowired
+	CoachService coachService;
+	@Autowired
+	TimetableService timetableService;
 	@GetMapping("/admin")
 	public ModelAndView adminMain() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -617,6 +625,225 @@ public class AdminController {
 		List<Type> types = typeService.outputAll();
 		modelAndView.addObject("nameOfTable","Type");
 		modelAndView.addObject("tableType", types);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@GetMapping("/admin-coach")
+	public ModelAndView coachAdmin() {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		List<Coach> coachs = coachService.outputAll();
+		List<Type> types = typeService.outputAll();
+		List<Class> classes=classService.outputAll();
+		List<Category> categories=categoryService.outputAll();
+		List<Station> stations=stationService.outputAll();
+		modelAndView.addObject("listType", types);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listCategory", categories);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listClass", classes);
+		modelAndView.addObject("nameOfTable","Coach");
+		modelAndView.addObject("tableCoach", coachs);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-coach-create")
+	public ModelAndView coachAdminCreate(@RequestParam String type_coach_id, @RequestParam String category_coach_id, @RequestParam String class_coach_id, @RequestParam String station_id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Coach coachCreate = new Coach();
+		coachCreate.setCategory(categoryService.findById(Long.valueOf(category_coach_id)));
+		coachCreate.setType(typeService.findById(Long.valueOf(type_coach_id)));
+		coachCreate.setClassCoach(classService.findById(Long.valueOf(class_coach_id)));
+		coachCreate.setStationOrder(stationService.findById(Long.valueOf(station_id)));
+		coachService.saveCoach(coachCreate);
+		List<Coach> coachs = coachService.outputAll();
+		List<Type> types = typeService.outputAll();
+		List<Class> classes=classService.outputAll();
+		List<Category> categories=categoryService.outputAll();
+		List<Station> stations=stationService.outputAll();
+		modelAndView.addObject("listType", types);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listCategory", categories);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listClass", classes);
+		modelAndView.addObject("nameOfTable","Coach");
+		modelAndView.addObject("tableCoach", coachs);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-coach-del")
+	public ModelAndView coachAdminDel(@RequestParam String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		coachService.del(Long.valueOf(id));
+		List<Coach> coachs = coachService.outputAll();
+		List<Type> types = typeService.outputAll();
+		List<Class> classes=classService.outputAll();
+		List<Category> categories=categoryService.outputAll();
+		List<Station> stations=stationService.outputAll();
+		modelAndView.addObject("listType", types);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listCategory", categories);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listClass", classes);
+		modelAndView.addObject("nameOfTable","Coach");
+		modelAndView.addObject("tableCoach", coachs);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-coach-update")
+	public ModelAndView coachAdminUpdate(@RequestParam String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Coach coachUpdate = coachService.findById(Long.valueOf(id));
+		List<Coach> coachs = coachService.outputAll();
+		List<Type> types = typeService.outputAll();
+		List<Class> classes=classService.outputAll();
+		List<Category> categories=categoryService.outputAll();
+		List<Station> stations=stationService.outputAll();
+		modelAndView.addObject("coachUpdate", coachUpdate);
+		modelAndView.addObject("update", true);
+		modelAndView.addObject("listType", types);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listCategory", categories);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listClass", classes);
+		modelAndView.addObject("nameOfTable","Coach");
+		modelAndView.addObject("tableCoach", coachs);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-coach-update-true")
+	public ModelAndView coachAdminUpdateTrue(@RequestParam String id, @RequestParam String type_coach_id, @RequestParam String class_coach_id, @RequestParam String category_coach_id, @RequestParam String station_id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Coach coachUpdate = new Coach();
+		coachUpdate.setId(Long.valueOf(id));
+		coachUpdate.setType(typeService.findById(Long.valueOf(type_coach_id)));
+		coachUpdate.setCategory(categoryService.findById(Long.valueOf(category_coach_id)));
+		coachUpdate.setClassCoach(classService.findById(Long.valueOf(class_coach_id)));
+		coachUpdate.setStationOrder(stationService.findById(Long.valueOf(station_id)));
+		coachService.saveCoach(coachUpdate);
+		List<Coach> coachs = coachService.outputAll();
+		List<Type> types = typeService.outputAll();
+		List<Class> classes=classService.outputAll();
+		List<Category> categories=categoryService.outputAll();
+		List<Station> stations=stationService.outputAll();
+		modelAndView.addObject("listType", types);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listCategory", categories);
+		modelAndView.addObject("listStation", stations);
+		modelAndView.addObject("listClass", classes);
+		modelAndView.addObject("nameOfTable","Coach");
+		modelAndView.addObject("tableCoach", coachs);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@GetMapping("/admin-timetable")
+	public ModelAndView timetableAdmin() {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		List<Way> ways = wayService.outputAll();
+		List<Timetable> timetables = timetableService.outputAll();
+		modelAndView.addObject("listWay", ways);
+		modelAndView.addObject("nameOfTable","Timetable");
+		modelAndView.addObject("tableTimetable", timetables);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-timetable-create")
+	public ModelAndView timetableAdminCreate(@RequestParam String way_id, @RequestParam String date) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		SimpleDateFormat format = new SimpleDateFormat();
+		format.applyPattern("yyyy-MM-dd");
+		Timetable timetableCreate = new Timetable();
+		try {
+			timetableCreate.setDate(format.parse(date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		timetableCreate.setWay(wayService.findById(Long.valueOf(way_id)));
+		timetableService.saveTimetable(timetableCreate);
+		List<Way> ways = wayService.outputAll();
+		List<Timetable> timetables = timetableService.outputAll();
+		modelAndView.addObject("listWay", ways);
+		modelAndView.addObject("nameOfTable","Timetable");
+		modelAndView.addObject("tableTimetable", timetables);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-timetable-del")
+	public ModelAndView timetableAdminDel(@RequestParam String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		timetableService.del(Long.valueOf(id));
+		List<Way> ways = wayService.outputAll();
+		List<Timetable> timetables = timetableService.outputAll();
+		modelAndView.addObject("listWay", ways);
+		modelAndView.addObject("nameOfTable","Timetable");
+		modelAndView.addObject("tableTimetable", timetables);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-timetable-update")
+	public ModelAndView timetableAdminUpdate(@RequestParam String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Timetable timetableUpdate = timetableService.findById(Long.valueOf(id));
+		List<Way> ways = wayService.outputAll();
+		List<Timetable> timetables = timetableService.outputAll();
+		modelAndView.addObject("update",true);
+		modelAndView.addObject("timetableUpdate", timetableUpdate);
+		modelAndView.addObject("listWay", ways);
+		modelAndView.addObject("nameOfTable","Timetable");
+		modelAndView.addObject("tableTimetable", timetables);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-timetable-update-true")
+	public ModelAndView timetableAdminUpdateTrue(@RequestParam String id, @RequestParam String way_id, @RequestParam String date) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Timetable timetableUpdate = new Timetable();
+		timetableUpdate.setId(Long.valueOf(id));
+		timetableUpdate.setWay(wayService.findById(Long.valueOf(way_id)));
+		SimpleDateFormat format = new SimpleDateFormat();
+		format.applyPattern("yyyy-MM-dd");
+		try {
+			timetableUpdate.setDate(format.parse(date));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		timetableService.saveTimetable(timetableUpdate);
+		List<Way> ways = wayService.outputAll();
+		List<Timetable> timetables = timetableService.outputAll();
+		modelAndView.addObject("listWay", ways);
+		modelAndView.addObject("nameOfTable","Timetable");
+		modelAndView.addObject("tableTimetable", timetables);
 		modelAndView.addObject(passenger);
 		modelAndView.setViewName("admin");
 		return modelAndView;
