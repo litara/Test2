@@ -1,10 +1,14 @@
 package com.litara.Test2.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -28,6 +32,14 @@ public class Coach {
 	@ManyToOne
 	@JoinColumn(name="station_id")
 	private Station stationOrder;
+	@OneToMany(mappedBy="coachConsist", cascade=CascadeType.ALL)
+	private Set<Consist> setConsist;
+	public Set<Consist> getSetConsist() {
+		return setConsist;
+	}
+	public void setSetConsist(Set<Consist> setConsist) {
+		this.setConsist = setConsist;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -58,5 +70,7 @@ public class Coach {
 	public void setStationOrder(Station stationOrder) {
 		this.stationOrder = stationOrder;
 	}
-	
+	public String getTypeCategoryClass() {
+		return type.getName()+"|"+category.getName()+"|"+classCoach.getName();
+	}
 }

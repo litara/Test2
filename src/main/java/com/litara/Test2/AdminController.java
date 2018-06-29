@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.litara.Test2.model.Category;
 import com.litara.Test2.model.Class;
 import com.litara.Test2.model.Coach;
+import com.litara.Test2.model.Consist;
 import com.litara.Test2.model.Passenger;
 import com.litara.Test2.model.Station;
 import com.litara.Test2.model.Timetable;
@@ -28,6 +29,7 @@ import com.litara.Test2.model.Way;
 import com.litara.Test2.services.CategoryService;
 import com.litara.Test2.services.ClassService;
 import com.litara.Test2.services.CoachService;
+import com.litara.Test2.services.ConsistService;
 import com.litara.Test2.services.PassengerService;
 import com.litara.Test2.services.StationService;
 import com.litara.Test2.services.TimetableService;
@@ -56,6 +58,8 @@ public class AdminController {
 	CoachService coachService;
 	@Autowired
 	TimetableService timetableService;
+	@Autowired
+	ConsistService consistService;
 	@GetMapping("/admin")
 	public ModelAndView adminMain() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -844,6 +848,25 @@ public class AdminController {
 		modelAndView.addObject("listWay", ways);
 		modelAndView.addObject("nameOfTable","Timetable");
 		modelAndView.addObject("tableTimetable", timetables);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@GetMapping("/admin-consist")
+	public ModelAndView consistAdmin() {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		List<Station> stations = stationService.outputAll();
+		List<Train> trains = trainService.outputAll();
+		List<Consist> consists = consistService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("listTrain", trains);
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("listStationStart", stations);
+		modelAndView.addObject("listStationEnd", stations);
+		modelAndView.addObject("nameOfTable","Consist");
+		modelAndView.addObject("tableConsist", consists);
 		modelAndView.addObject(passenger);
 		modelAndView.setViewName("admin");
 		return modelAndView;

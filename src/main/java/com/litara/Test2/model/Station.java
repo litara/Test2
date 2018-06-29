@@ -26,6 +26,22 @@ public class Station {
 	private Set<Way> setWay;
 	@OneToMany(mappedBy="stationOrder", cascade=CascadeType.ALL)
 	private Set<Coach> setCoach;
+	@OneToMany(mappedBy="stationConsistStart", cascade=CascadeType.ALL)
+	private Set<Consist> setConsistStart;
+	@OneToMany(mappedBy="stationConsistEnd", cascade=CascadeType.ALL)
+	private Set<Consist> setConsistEnd;
+	public Set<Consist> getSetConsistStart() {
+		return setConsistStart;
+	}
+	public void setSetConsistStart(Set<Consist> setConsistStart) {
+		this.setConsistStart = setConsistStart;
+	}
+	public Set<Consist> getSetConsistEnd() {
+		return setConsistEnd;
+	}
+	public void setSetConsistEnd(Set<Consist> setConsistEnd) {
+		this.setConsistEnd = setConsistEnd;
+	}
 	public Long getId() {
 		return id;
 	}

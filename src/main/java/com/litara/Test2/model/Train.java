@@ -25,6 +25,14 @@ public class Train {
 	private Date date_stop;
 	@OneToMany(mappedBy="train", cascade=CascadeType.ALL)
 	private Set<Way> setWay;
+	@OneToMany(mappedBy="trainConsist", cascade=CascadeType.ALL)
+	private Set<Consist> setConsist;
+	public Set<Consist> getSetConsist() {
+		return setConsist;
+	}
+	public void setSetConsist(Set<Consist> setConsist) {
+		this.setConsist = setConsist;
+	}
 	public Long getId() {
 		return id;
 	}
