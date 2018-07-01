@@ -1,8 +1,12 @@
 package com.litara.Test2.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -22,6 +26,14 @@ public class Passenger{
 	private String surname;
 	private String middle_name;
 	private int active;
+	@OneToMany(mappedBy="passengetTicket", cascade = CascadeType.ALL)
+	private Set<Ticket> tickets;
+	public Set<Ticket> getTickets() {
+		return tickets;
+	}
+	public void setTickets(Set<Ticket> tickets) {
+		this.tickets = tickets;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -1,7 +1,6 @@
 package com.litara.Test2.model;
 
 import java.sql.Time;
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;

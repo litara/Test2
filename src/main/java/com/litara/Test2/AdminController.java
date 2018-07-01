@@ -3,7 +3,6 @@ package com.litara.Test2;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,6 +19,7 @@ import com.litara.Test2.model.Class;
 import com.litara.Test2.model.Coach;
 import com.litara.Test2.model.Consist;
 import com.litara.Test2.model.Passenger;
+import com.litara.Test2.model.Place;
 import com.litara.Test2.model.Station;
 import com.litara.Test2.model.Timetable;
 import com.litara.Test2.model.Train;
@@ -31,6 +30,7 @@ import com.litara.Test2.services.ClassService;
 import com.litara.Test2.services.CoachService;
 import com.litara.Test2.services.ConsistService;
 import com.litara.Test2.services.PassengerService;
+import com.litara.Test2.services.PlaceService;
 import com.litara.Test2.services.StationService;
 import com.litara.Test2.services.TimetableService;
 import com.litara.Test2.services.TrainService;
@@ -60,6 +60,8 @@ public class AdminController {
 	TimetableService timetableService;
 	@Autowired
 	ConsistService consistService;
+	@Autowired
+	PlaceService placeService;
 	@GetMapping("/admin")
 	public ModelAndView adminMain() {
 		ModelAndView modelAndView = new ModelAndView();
@@ -867,6 +869,185 @@ public class AdminController {
 		modelAndView.addObject("listStationEnd", stations);
 		modelAndView.addObject("nameOfTable","Consist");
 		modelAndView.addObject("tableConsist", consists);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-consist-create")
+	public ModelAndView consistAdminCreate(@RequestParam String train_id, @RequestParam String coach_id, @RequestParam String number_in_consist, @RequestParam String station_id_start, @RequestParam String station_id_end) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Consist consistCreate = new Consist();
+		consistCreate.setNumber_in_consist(Integer.valueOf(number_in_consist));
+		consistCreate.setCoachConsist(coachService.findById(Long.valueOf(coach_id)));
+		consistCreate.setTrainConsist(trainService.findById(Long.valueOf(train_id)));
+		consistCreate.setStationConsistStart(stationService.findById(Long.valueOf(station_id_start)));
+		consistCreate.setStationConsistEnd(stationService.findById(Long.valueOf(station_id_end)));
+		consistService.saveConsist(consistCreate);
+		List<Station> stations = stationService.outputAll();
+		List<Train> trains = trainService.outputAll();
+		List<Consist> consists = consistService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("listTrain", trains);
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("listStationStart", stations);
+		modelAndView.addObject("listStationEnd", stations);
+		modelAndView.addObject("nameOfTable","Consist");
+		modelAndView.addObject("tableConsist", consists);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-consist-del")
+	public ModelAndView consistAdminDel(@RequestParam String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		consistService.del(Long.valueOf(id));
+		List<Station> stations = stationService.outputAll();
+		List<Train> trains = trainService.outputAll();
+		List<Consist> consists = consistService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("listTrain", trains);
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("listStationStart", stations);
+		modelAndView.addObject("listStationEnd", stations);
+		modelAndView.addObject("nameOfTable","Consist");
+		modelAndView.addObject("tableConsist", consists);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-consist-update")
+	public ModelAndView consistAdminUpdate(@RequestParam String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Consist consistUpdate = consistService.findById(Long.valueOf(id));
+		List<Station> stations = stationService.outputAll();
+		List<Train> trains = trainService.outputAll();
+		List<Consist> consists = consistService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("update", true);
+		modelAndView.addObject("consistUpdate", consistUpdate);
+		modelAndView.addObject("listTrain", trains);
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("listStationStart", stations);
+		modelAndView.addObject("listStationEnd", stations);
+		modelAndView.addObject("nameOfTable","Consist");
+		modelAndView.addObject("tableConsist", consists);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-consist-update-true")
+	public ModelAndView consistAdminUpdateTrue(@RequestParam String id, @RequestParam String train_id, @RequestParam String coach_id, @RequestParam String number_in_consist, @RequestParam String station_id_start, @RequestParam String station_id_end) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Consist consistUpdate = consistService.findById(Long.valueOf(id));
+		consistUpdate.setNumber_in_consist(Integer.valueOf(number_in_consist));
+		consistUpdate.setCoachConsist(coachService.findById(Long.valueOf(coach_id)));
+		consistUpdate.setTrainConsist(trainService.findById(Long.valueOf(train_id)));
+		consistUpdate.setStationConsistStart(stationService.findById(Long.valueOf(station_id_start)));
+		consistUpdate.setStationConsistEnd(stationService.findById(Long.valueOf(station_id_end)));
+		consistService.saveConsist(consistUpdate);
+		List<Station> stations = stationService.outputAll();
+		List<Train> trains = trainService.outputAll();
+		List<Consist> consists = consistService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("listTrain", trains);
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("listStationStart", stations);
+		modelAndView.addObject("listStationEnd", stations);
+		modelAndView.addObject("nameOfTable","Consist");
+		modelAndView.addObject("tableConsist", consists);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@GetMapping("/admin-place")
+	public ModelAndView placeAdmin() {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		List<Place> places=placeService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("nameOfTable","Place");
+		modelAndView.addObject("tablePlace", places);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-place-create")
+	public ModelAndView placeAdminCreate(@RequestParam String coach_id, @RequestParam String number, @RequestParam String type) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Place placeCreate = new Place();
+		placeCreate.setCoachPlace(coachService.findById(Long.valueOf(coach_id)));
+		placeCreate.setNumber(Integer.valueOf(number));
+		placeCreate.setType(type);
+		placeService.savePlace(placeCreate);
+		List<Place> places=placeService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("nameOfTable","Place");
+		modelAndView.addObject("tablePlace", places);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-place-del")
+	public ModelAndView placeAdminDel(@RequestParam String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		placeService.del(Long.valueOf(id));
+		List<Place> places=placeService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("nameOfTable","Place");
+		modelAndView.addObject("tablePlace", places);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-place-update")
+	public ModelAndView placeAdminUpdate(@RequestParam String id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Place placeUpdate = placeService.findById(Long.valueOf(id));
+		List<Place> places=placeService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("update", true);
+		modelAndView.addObject("placeUpdate", placeUpdate);
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("nameOfTable","Place");
+		modelAndView.addObject("tablePlace", places);
+		modelAndView.addObject(passenger);
+		modelAndView.setViewName("admin");
+		return modelAndView;
+	}
+	@PostMapping("/admin-place-update-true")
+	public ModelAndView placeAdminUpdateTrue(@RequestParam String id, @RequestParam String coach_id, @RequestParam String number, @RequestParam String type) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Place placeCreate = new Place();
+		placeCreate.setId(Long.valueOf(id));
+		placeCreate.setCoachPlace(coachService.findById(Long.valueOf(coach_id)));
+		placeCreate.setNumber(Integer.valueOf(number));
+		placeCreate.setType(type);
+		placeService.savePlace(placeCreate);
+		List<Place> places=placeService.outputAll();
+		List<Coach> coachs=coachService.outputAll();
+		modelAndView.addObject("listCoach", coachs);
+		modelAndView.addObject("nameOfTable","Place");
+		modelAndView.addObject("tablePlace", places);
 		modelAndView.addObject(passenger);
 		modelAndView.setViewName("admin");
 		return modelAndView;

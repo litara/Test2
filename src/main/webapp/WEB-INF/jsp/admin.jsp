@@ -26,6 +26,7 @@
 				<a class="mybtn btn-dark btn elementPanel" href="admin-coach">Вагоны</a>
 				<a class="mybtn btn-dark btn elementPanel" href="admin-timetable">Расписание</a>
 				<a class="mybtn btn-dark btn elementPanel" href="admin-consist">Составы</a>
+				<a class="mybtn btn-dark btn elementPanel" href="admin-place">Места</a>
 			</div>
 			<div class="col-9 editing">
 				<c:if test="${nameOfTable==null}">

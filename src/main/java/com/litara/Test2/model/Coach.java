@@ -34,6 +34,8 @@ public class Coach {
 	private Station stationOrder;
 	@OneToMany(mappedBy="coachConsist", cascade=CascadeType.ALL)
 	private Set<Consist> setConsist;
+	@OneToMany(mappedBy="coachPlace", cascade=CascadeType.ALL)
+	private Set<Place> setPlace;
 	public Set<Consist> getSetConsist() {
 		return setConsist;
 	}
@@ -73,4 +75,11 @@ public class Coach {
 	public String getTypeCategoryClass() {
 		return type.getName()+"|"+category.getName()+"|"+classCoach.getName();
 	}
+	public Set<Place> getSetPlace() {
+		return setPlace;
+	}
+	public void setSetPlace(Set<Place> setPlace) {
+		this.setPlace = setPlace;
+	}
+	
 }
