@@ -26,7 +26,7 @@ public class Passenger{
 	private String surname;
 	private String middle_name;
 	private int active;
-	@OneToMany(mappedBy="passengetTicket", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="passengerTicket", cascade = CascadeType.ALL)
 	private Set<Ticket> tickets;
 	public Set<Ticket> getTickets() {
 		return tickets;

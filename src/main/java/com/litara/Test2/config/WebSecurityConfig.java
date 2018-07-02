@@ -2,6 +2,7 @@ package com.litara.Test2.config;
 import java.net.Authenticator;
 import java.util.List;
 
+import javax.servlet.FilterRegistration;
 import javax.sql.DataSource;
 import org.apache.catalina.authenticator.SpnegoAuthenticator.AuthenticateAction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,25 +32,21 @@ import com.litara.Test2.services.MyUserDetailsService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	DataSource dataSource;
+	
 	@Autowired
 	private MyUserDetailsService userDetails;
-	@Value("${spring.queries.user-query}")
-	private String userQuery;
-	@Value("${spring.queries.role-query}")
-	private String roleQuery;
-	private String[] admin = {"/admin**","/admin-passenger","/admin-passenger-del","/admin-passenger-update","/admin-passenger-true", "/admin-passenger-create"};
+	
+	private String[] admin = {"/admin**"};
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetails).passwordEncoder(bCryptPasswordEncoder);
 	}
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		CharacterEncodingFilter filter = new CharacterEncodingFilter();
-        filter.setEncoding("UTF-8");
-        filter.setForceEncoding(true);
-        http.addFilterBefore(filter, CsrfFilter.class);
+		
 		http
 			.authorizeRequests()
 				.antMatchers("/").permitAll()
@@ -57,6 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/login").permitAll()
 				.antMatchers("/css/**").permitAll()
 				.antMatchers("/bootstrap_js/**").permitAll()
+				.antMatchers("/img/**").permitAll()
 				.antMatchers("/bootstrap_css/**").permitAll()
 				.antMatchers(admin).hasAuthority("ADMIN")
 				.antMatchers("/registration").anonymous()
@@ -74,7 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.permitAll()
 				.logoutSuccessUrl("/main");
 		http.csrf().disable();
-		super.configure(http);
 	}
 	
 }
