@@ -1,6 +1,7 @@
 package com.litara.Test2.model;
 
 import java.sql.Time;
+import java.util.Comparator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -31,6 +32,11 @@ public class Way {
 	private Time end_time;
 	@OneToMany(mappedBy="way", cascade=CascadeType.ALL)
 	private Set<Timetable> timetable;
+	public static Comparator<Way> COMPARE_BY_START_TIME = new Comparator<Way>() {
+        public int compare(Way one, Way other) {
+            return one.start_time.compareTo(other.start_time);
+        }
+    };
 	public Set<Timetable> getTimetable() {
 		return timetable;
 	}

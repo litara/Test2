@@ -408,8 +408,8 @@ public class AdminController {
 		wayUpdate.setId(Long.valueOf(id));
 		wayUpdate.setStation(stationService.findById(Long.valueOf(station_id)));
 		wayUpdate.setTrain(trainService.findById(Long.valueOf(train_id)));
-		wayUpdate.setStart_time(Time.valueOf(start_time));
-		wayUpdate.setEnd_time(Time.valueOf(end_time));
+		wayUpdate.setStart_time(Time.valueOf(start_time+":00"));
+		wayUpdate.setEnd_time(Time.valueOf(end_time+":00"));
 		wayService.saveWay(wayUpdate);
 		List<Way> ways = wayService.outputAll();
 		List<Train> trains = trainService.outputAll();

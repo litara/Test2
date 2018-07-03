@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ import com.litara.Test2.model.Way;
 import com.litara.Test2.services.PassengerService;
 import com.litara.Test2.services.StationService;
 import com.litara.Test2.services.TimetableService;
+import com.litara.Test2.services.TrainService;
 
 @Controller
 public class MainController {
@@ -34,6 +36,8 @@ public class MainController {
 	private StationService stationService;
 	@Autowired
 	private TimetableService timetableService;
+	@Autowired
+	private TrainService trainService;
 	@PostMapping(path="/login")
 	public ModelAndView login(@RequestParam String email, @RequestParam String password) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -130,6 +134,24 @@ public class MainController {
 			modelAndView.addObject(passenger);
 		}
 		modelAndView.setViewName("main");
+		modelAndView.addObject("search",true);
+		return modelAndView;
+	}
+	@PostMapping("/more")
+	public ModelAndView moreAboutTrain(@RequestParam String train_id) {
+		ModelAndView modelAndView = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Passenger passenger = passengerService.findByEmail(auth.getName());
+		Train train=trainService.findById(Long.valueOf(train_id));
+		modelAndView.addObject("train",train);
+		Set<Way> usortedways=train.getSetWay();
+		Set<Way> sortedways=new TreeSet<Way>(Way.COMPARE_BY_START_TIME);
+		sortedways.addAll(usortedways);
+		modelAndView.addObject("ways",sortedways);
+		if(passenger!=null) {
+			modelAndView.addObject(passenger);
+		}
+		modelAndView.setViewName("more");
 		modelAndView.addObject("search",true);
 		return modelAndView;
 	}
