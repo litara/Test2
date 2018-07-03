@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div class="container">
-	<h2>Создать путь</h2>
+	<h2>Создать вагон</h2>
 	<form method="post" action="admin-coach-create">
 	<select name="type_coach_id">
 		<option selected>Выберите тип</option>

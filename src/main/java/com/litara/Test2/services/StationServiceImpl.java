@@ -17,6 +17,11 @@ public class StationServiceImpl implements StationService{
 	}
 
 	@Override
+	public Station findByName(String name) {
+		return stationRepository.findByName(name);
+	}
+
+	@Override
 	public List<Station> outputAll() {
 		return stationRepository.findAll();
 	}

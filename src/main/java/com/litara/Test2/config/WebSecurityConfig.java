@@ -56,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 				.antMatchers("/bootstrap_js/**").permitAll()
 				.antMatchers("/img/**").permitAll()
 				.antMatchers("/bootstrap_css/**").permitAll()
+				.antMatchers("/search").permitAll()
 				.antMatchers(admin).hasAuthority("ADMIN")
 				.antMatchers("/registration").anonymous()
 				.anyRequest().authenticated()

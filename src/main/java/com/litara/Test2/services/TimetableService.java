@@ -1,5 +1,6 @@
 package com.litara.Test2.services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.litara.Test2.model.Station;
@@ -10,4 +11,5 @@ public interface TimetableService {
 	public List<Timetable> outputAll();
 	public void saveTimetable(Timetable timetable);
 	public void del(Long id);
+	public Timetable findByDate(Date date);
 }

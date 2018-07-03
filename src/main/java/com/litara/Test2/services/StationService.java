@@ -9,4 +9,5 @@ public interface StationService {
 	public List<Station> outputAll();
 	public void saveStation(Station station);
 	public void del(Long id);
+	public Station findByName(String name);
 }

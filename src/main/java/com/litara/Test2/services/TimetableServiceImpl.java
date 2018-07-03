@@ -1,5 +1,6 @@
 package com.litara.Test2.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,11 @@ public class TimetableServiceImpl implements TimetableService{
 	@Override
 	public void del(Long id) {
 		timetableRepository.deleteById(id);
+	}
+
+	@Override
+	public Timetable findByDate(Date date) {
+		return timetableRepository.findByDate(date);
 	}
 	
 }
