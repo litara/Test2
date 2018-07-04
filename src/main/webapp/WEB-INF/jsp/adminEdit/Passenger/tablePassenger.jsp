@@ -6,9 +6,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="bootstrap_js/jquery-3.3.1.min.js" defer></script>
+<script src="js/admin.js" defer></script>
 </head>
 <body>
 	<div class="container">
+	<div id="feedback"></div>
+		<form action="search-admin" method="post" name="form" onsubmit="return false;">
+  		<p>
+    		Живой поиск:<br> 
+    		<input name="search" type="text" id="search">
+    		<small>Вводите на английском языке</small>
+  		</p>
+		</form>
+		<div id="resSearch"></div>
+		
 		<h2>Basic Table</h2>
 		<table class="table">
 			<thead>

@@ -34,7 +34,7 @@
 							<button type="button" class="btn mybtn dropdown-toggle bg-dark text-light" data-toggle="dropdown">
     							Войти
   							</button>
-  							<div class="dropdown-menu dropdown-menu-right mydropdown">
+  							<div class="dropdown-menu dropdown-menu-right mydropdown-unreg">
     							<form name=loginForm method="POST" action="login">
     								<input type="hidden" name="command" value="login">
     								<input type="email" id="inputEmail" name="email" class="form-control myinput" placeholder="Email address">

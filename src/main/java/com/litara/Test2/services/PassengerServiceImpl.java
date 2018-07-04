@@ -2,7 +2,10 @@ package com.litara.Test2.services;
 
 import java.util.List;
 
+import javax.management.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.querydsl.binding.QuerydslBindingsFactory;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +53,16 @@ public class PassengerServiceImpl implements PassengerService{
 	public Passenger findById(Long id) {
 		Passenger passenger = passengerRepository.getOne(id);
 		return passenger;
+	}
+
+	@Override
+	public List<Passenger> findByName(String name) {
+		return passengerRepository.findByName(name);
+	}
+
+	@Override
+	public List<Passenger> findByNameLike(String name) {
+		return passengerRepository.findByNameLike(name);
 	}
 	
 }

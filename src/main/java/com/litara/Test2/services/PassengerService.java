@@ -12,4 +12,6 @@ public interface PassengerService {
 	public void del(Long id);
 	public void update(Passenger passenger);
 	public Passenger findById(Long id);
+	public List<Passenger> findByName(String name);
+	public List<Passenger> findByNameLike(String name);
 }

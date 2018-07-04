@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="bootstrap_css/bootstrap.min.css">
 <script src="bootstrap_js/bootstrap.bundle.min.js" defer></script>
 <link rel="stylesheet" href="css/adminpanel.css">
+
 </head>
 <body class="body">
 	<c:import url="adminNavbar.jsp"></c:import>
@@ -27,6 +28,5 @@
 				</c:if>
 			</div>
 		</div>
-	</div>
 </body>
 </html>
