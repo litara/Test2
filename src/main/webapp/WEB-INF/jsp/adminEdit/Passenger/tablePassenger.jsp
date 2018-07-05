@@ -5,24 +5,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <script src="bootstrap_js/jquery-3.3.1.min.js" defer></script>
-<script src="js/admin.js" defer></script>
+<script src="js/admin-passenger.js" defer></script>
 </head>
 <body>
-	<div class="container">
-	<div id="feedback"></div>
-		<form action="search-admin" method="post" name="form" onsubmit="return false;">
-  		<p>
-    		Живой поиск:<br> 
-    		<input name="search" type="text" id="search">
-    		<small>Вводите на английском языке</small>
-  		</p>
-		</form>
-		<div id="resSearch"></div>
-		
-		<h2>Basic Table</h2>
-		<table class="table">
+	<div class="container clearfix">
+		<div class="container"><form action="search-admin" method="post" name="form" onsubmit="return false;">
+    		<input autocomplete="off" name="search" type="text" class="form-control float-right w-25 margin-form-control-5" id="search" placeholder="Поиск по имени..">
+		</form></div>
+		<div class="container row">
+			<input type="text" id="page" class="form-control col-1 margin-form-control-5" placeholder="Номер страницы" value="1">
+			<input type="button" class="btn btn-primary col-1 margin-form-control-5" id="next" value="Перейти..">
+		</div>
+		<table class="table table-dark margin-form-control-5">
 			<thead>
 				<tr>
 					<th>Email</th>
@@ -30,10 +25,11 @@
 					<th>Фамилия</th>
 					<th>Отчество</th>
 					<th></th>
+					<th></th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach items="${tablePassenger}" var="i">
+			<tbody id="tbody">
+				<c:forEach items="${tablePassenger}" var="i" begin="0" end="9">
 
 					<tr>
 						<td>${i.getEmail()}</td>
@@ -43,14 +39,14 @@
 						<td>
 						<form method="POST" action="admin-passenger-del">
 							<input type="hidden" name="do" value="del"/>
-							<input type="submit" class="btn" value="Delete">
+							<input type="submit" class="btn" value="Удалить">
 							<input type="hidden" name="id" value="${i.getId()}"/>
 						</form>
 						</td>
 						<td>
 							<form action="admin-passenger-update" method="post">
 								<input type="hidden" name="id" value="${i.getId()}">
-								<input type="submit" class="btn" value="Update">
+								<input type="submit" class="btn" value="Изменить">
 							</form>
 						</td>
 					</tr>

@@ -8,12 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="admin-type-update-true" class="container">
+	<form method="post" action="admin-type-update-true" class="container row">
 	<input type="hidden" name="id" value="${typeUpdate.getId()}">
-	<input type="text" class="text" name="name" value="${typeUpdate.getName()}">
-	<input type="submit" class="btn" value="Сохранить">
-	
+	<input type="text" class="form-control col-2 margin-form-control-5" name="name" value="${typeUpdate.getName()}">
+	<input type="submit" class="btn btn-primary col-2 margin-form-control-5" value="Сохранить">
 	</form>
-
 </body>
 </html>

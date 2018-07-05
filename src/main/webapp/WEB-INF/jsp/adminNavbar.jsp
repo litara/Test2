@@ -13,8 +13,9 @@
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark mynavbar" style="padding: 0;" role="navigation">
 		<div class="container-fluid">
-		<button type="button" class="navbar navbar-expand-sm btn mybtn dropdown-toggle bg-dark text-light" data-toggle="dropdown">
-    	Navbar
+		<a href="/" class="navbar-brand my-brand">Главная</a>
+		<button type="button" class="navbar-brand navbar-expand-sm btn mybtn dropdown-toggle bg-dark" data-toggle="dropdown">
+    	Таблицы
   		</button>
 		<div class="dropdown-menu mydropdown col-3 navigation container">
     			<a class="mybtn btn-dark btn elementPanel" href="admin-passenger">Пассажиры</a>
@@ -29,7 +30,7 @@
 				<a class="mybtn btn-dark btn elementPanel" href="admin-consist">Составы</a>
 				<a class="mybtn btn-dark btn elementPanel" href="admin-place">Места</a>		
   		</div>
-  		<a href="/" class="navbar-brand my-brand">Главная</a>
+  		
 		<button class="navbar-toggler" style="border: 0;" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>

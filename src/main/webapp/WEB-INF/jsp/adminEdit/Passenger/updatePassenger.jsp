@@ -5,18 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="admin-passenger-update-true" class="container">
+	<form method="post" action="admin-passenger-update-true" class="container row">
 	<input type="hidden" name="active" value="${passengerUpdate.getActive()}">
 	<input type="hidden" name="id" value="${passengerUpdate.getId()}">
-	<input type="text" class="text" name="email" value="${passengerUpdate.getEmail() }">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="email" value="${passengerUpdate.getEmail() }">
 	<input type="hidden" name="password" value="${passengerUpdate.getPassword()}">
-	<input type="text" class="text" name="name" value="${passengerUpdate.getName()}">
-	<input type="text" class="text" name="surname" value="${passengerUpdate.getSurname()}">
-	<input type="text" class="text" name="middle_name" value="${passengerUpdate.getMiddle_name()}">
-	<select name="role">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="name" value="${passengerUpdate.getName()}" placeholder="Имя">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="surname" value="${passengerUpdate.getSurname()}" placeholder="Фамилия">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="middle_name" value="${passengerUpdate.getMiddle_name()}" placeholder="Отчество">
+	<select name="role" class="form-control col-2 margin-form-control-5">
 	<c:if test="${passengerUpdate.getRole()=='ADMIN' }">
 		<option value="PASSENGER">Пассажир</option>
 		<option selected value="ADMIN">Администратор</option>
@@ -26,7 +25,7 @@
 		<option value="ADMIN">Администратор</option>
 	</c:if>
 	</select>
-	<input type="submit" class="btn" value="Сохранить">
+	<input type="submit" class="btn btn-primary col-2 margin-form-control-5" value="Сохранить">
 	
 	</form>
 

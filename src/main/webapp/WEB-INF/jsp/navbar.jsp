@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Nya</title>
 <link rel="stylesheet" href="css/navbar.css">
 </head>
 <body>
@@ -13,7 +12,7 @@
 
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark mynavbar" style="padding: 0;" role="navigation">
 		<div class="container-fluid">
-		<a class="navbar-brand" href="/">Navbar</a>
+		<a class="navbar-brand" href="/">Главная</a>
 		<button class="navbar-toggler" style="border: 0;" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>

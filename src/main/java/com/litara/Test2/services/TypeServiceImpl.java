@@ -32,5 +32,10 @@ public class TypeServiceImpl implements TypeService{
 	public void del(Long id) {
 		typeRepository.deleteById(id);
 	}
+
+	@Override
+	public List<Type> findByNameLike(String name) {
+		return typeRepository.findByNameLike(name);
+	}
 	
 }

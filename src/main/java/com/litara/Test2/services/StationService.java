@@ -10,4 +10,5 @@ public interface StationService {
 	public void saveStation(Station station);
 	public void del(Long id);
 	public Station findByName(String name);
+	public List<Station> findByNameLike(String name);
 }

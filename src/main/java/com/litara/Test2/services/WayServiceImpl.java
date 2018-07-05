@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.litara.Test2.model.Train;
 import com.litara.Test2.model.Way;
 import com.litara.Test2.repos.WayRepository;
 
@@ -31,6 +32,11 @@ public class WayServiceImpl implements WayService{
 	@Override
 	public void del(Long id) {
 		wayRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Way> findByTrainName(String name) {
+		return wayRepository.findByTrainName(name);
 	}
 	
 }

@@ -32,5 +32,10 @@ public class TrainServiceImpl implements TrainService{
 		trainRepo.deleteById(id);
 		
 	}
+
+	@Override
+	public List<Train> findByNameLike(String name) {
+		return trainRepo.findByNameLike(name);
+	}
 	
 }

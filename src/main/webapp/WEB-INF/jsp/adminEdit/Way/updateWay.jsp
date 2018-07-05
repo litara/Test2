@@ -6,12 +6,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="admin-way-update-true" class="container">
+	<form method="post" action="admin-way-update-true" class="container row">
 	<input type="hidden" name="id" value="${wayUpdate.getId()}">
-	<select name="station_id">
+	<select name="station_id" class="form-control col-2 margin-form-control-5">
 	<option selected value="${wayUpdate.getStation().getId() }">${ wayUpdate.getStation().getName()}</option>
 	<c:forEach items="${ listStation}" var="station">
 		<c:if test="${station.getId()!=wayUpdate.getStation().getId()}">
@@ -19,7 +18,7 @@
 		</c:if>
 	</c:forEach>
 	</select>
-	<select name="train_id">
+	<select name="train_id" class="form-control col-2 margin-form-control-5">
 	<option selected value="${wayUpdate.getTrain().getId() }">${ wayUpdate.getTrain().getName()}</option>
 		<c:forEach items="${ listTrain}" var="train">
 			<c:if test="${train.getId()!=wayUpdate.getTrain().getId()}">
@@ -27,11 +26,9 @@
 			</c:if>
 		</c:forEach>
 	</select>
-	<input type="time" class="time" name="start_time" value="${wayUpdate.getStart_time() }">
-	<input type="time" class="time" name="end_time" value="${wayUpdate.getEnd_time() }">
-	<input type="submit" class="btn" value="Сохранить">
-	
+	<input type="time" class="form-control col-2 margin-form-control-5" name="start_time" value="${wayUpdate.getStart_time() }">
+	<input type="time" class="form-control col-2 margin-form-control-5" name="end_time" value="${wayUpdate.getEnd_time() }">
+	<input type="submit" class="btn btn-primary col-2 margin-form-control-5" value="Сохранить">
 	</form>
-
 </body>
 </html>

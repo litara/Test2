@@ -5,17 +5,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="admin-station-update-true" class="container">
+	<form method="post" action="admin-station-update-true" class="container row">
 	<input type="hidden" name="id" value="${stationUpdate.getId()}">
-	<input type="text" class="text" name="name" value="${stationUpdate.getName()}">
-	<input type="text" class="text" name="country" value="${stationUpdate.getCountry()}">
-	<input type="text" class="text" name="region" value="${stationUpdate.getRegion()}">
-	<input type="submit" class="btn" value="Сохранить">
-	
+	<input type="text" class="form-control col-2 margin-form-control-5" name="name" value="${stationUpdate.getName()}" placeholder="Имя">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="country" value="${stationUpdate.getCountry()}" placeholder="Страна">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="region" value="${stationUpdate.getRegion()}" placeholder="Регион">
+	<input type="submit" class="btn btn-primary col-2 margin-form-control-5" value="Сохранить">
 	</form>
-
 </body>
 </html>

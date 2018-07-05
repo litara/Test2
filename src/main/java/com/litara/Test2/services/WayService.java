@@ -10,4 +10,5 @@ public interface WayService {
 	public List<Way> outputAll();
 	public void saveWay(Way way);
 	public void del(Long id);
+	public List<Way> findByTrainName(String name);
 }

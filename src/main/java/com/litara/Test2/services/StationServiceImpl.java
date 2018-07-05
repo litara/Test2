@@ -35,5 +35,10 @@ public class StationServiceImpl implements StationService{
 	public void del(Long id) {
 		stationRepository.deleteById(id);
 	}
+
+	@Override
+	public List<Station> findByNameLike(String name) {
+		return stationRepository.findByNameLike(name);
+	}
 	
 }

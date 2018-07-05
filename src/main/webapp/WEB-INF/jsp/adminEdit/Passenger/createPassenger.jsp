@@ -4,18 +4,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 	<div class="container">
-	<h2>Создать пассажира</h2>
-	<form method="post" action="admin-passenger-create">
-	<input type="text" class="text" name="email" placeholder="Email">
-	<input type="text" class="text" name="password" placeholder="Password">
-	<input type="text" class="text" name="name" placeholder="Name">
-	<input type="text" class="text" name="surname" placeholder="SurName">
-	<input type="text" class="text" name="middle_name" placeholder="Middle Name">
-	<input type="submit" class="btn" value="Создать">
+	<form method="post" class="row" action="admin-passenger-create">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="email" placeholder="Email">
+	<input type="password" class="form-control col-2 margin-form-control-5" name="password" placeholder="Пароль">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="name" placeholder="Имя">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="surname" placeholder="Фамилия">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="middle_name" placeholder="Отчество">
+	<input type="submit" class="btn btn-primary col-1 margin-form-control-5" value="Создать">
 	
 	</form>
 	</div>

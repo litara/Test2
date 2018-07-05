@@ -10,4 +10,5 @@ public interface CategoryService {
 	public List<Category> outputAll();
 	public void saveCategory(Category category);
 	public void del(Long id);
+	public List<Category> findByNameLike(String name);
 }

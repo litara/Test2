@@ -4,17 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
 	<div class="container">
-	<h2>Создать станцию</h2>
-	<form method="post" action="admin-station-create">
-	<input type="text" class="text" name="name" placeholder="Name">
-	<input type="text" class="text" name="country" placeholder="Country">
-	<input type="text" class="text" name="region" placeholder="Region">
-	<input type="submit" class="btn" value="Создать">
-	
+	<form method="post" class="row" action="admin-station-create">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="name" placeholder="Имя">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="country" placeholder="Страна">
+	<input type="text" class="form-control col-2 margin-form-control-5" name="region" placeholder="Регион">
+	<input type="submit" class="btn btn-primary col-2 margin-form-control-5" value="Создать">
 	</form>
 	</div>
 </body>

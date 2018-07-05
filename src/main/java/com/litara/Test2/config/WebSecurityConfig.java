@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private MyUserDetailsService userDetails;
 	
-	private String[] admin = {"/admin**"};
+	private String[] admin = {"/admin**","/search-admin**"};
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	

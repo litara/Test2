@@ -9,4 +9,5 @@ public interface TrainService {
 	public List<Train> outputAll();
 	public void saveTrain(Train train);
 	public void del(Long id);
+	public List<Train> findByNameLike(String name);
 }

@@ -31,5 +31,10 @@ public class ClassServiceImpl implements ClassService{
 	public void del(Long id) {
 		classRepository.deleteById(id);
 	}
+
+	@Override
+	public List<Class> findByNameLike(String name) {
+		return classRepository.findByNameLike(name);
+	}
 	
 }

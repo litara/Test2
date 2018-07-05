@@ -10,4 +10,5 @@ public interface TypeService {
 	public List<Type> outputAll();
 	public void saveType(Type type);
 	public void del(Long id);
+	public List<Type> findByNameLike(String name);
 }

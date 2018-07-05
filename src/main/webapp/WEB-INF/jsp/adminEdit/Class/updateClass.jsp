@@ -5,14 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-	<form method="post" action="admin-class-update-true" class="container">
+	<form method="post" action="admin-class-update-true" class="container row">
 	<input type="hidden" name="id" value="${classUpdate.getId()}">
-	<input type="text" class="text" name="name" value="${classUpdate.getName()}">
-	<input type="submit" class="btn" value="Сохранить">
-	
+	<input type="text" class="form-control col-2 margin-form-control-5" name="name" value="${classUpdate.getName()}" placeholder="Имя">
+	<input type="submit" class="btn btn-primary col-2 margin-form-control-5" value="Сохранить">
 	</form>
 
 </body>
